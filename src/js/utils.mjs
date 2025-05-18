@@ -1,3 +1,5 @@
+// utils.mjs - Utility functions for DOM selection, local storage, and event handling
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -15,6 +17,7 @@ export function setLocalStorage(key, data) {
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
+  // Adds event listeners for both touch and click events
   qs(selector).addEventListener("touchend", (event) => {
     event.preventDefault();
     callback();
