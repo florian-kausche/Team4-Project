@@ -1,30 +1,47 @@
-// ProductDetails.mjs - Provides methods to fetch and find product data from JSON files (duplicate of ProductData)
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-// Helper function to convert fetch response to JSON or throw error
-function convertToJson(res) {
-  if (res.ok) {
-    return res.json();
-  } else {
-    throw new Error("Bad Response");
+export default class ProductDetails {
+
+  constructor(productId, dataSource) {
+    this.productId = productId;
+    this.product = {};
+    this.dataSource = dataSource;
+  }
+
+  async init() {
+    // use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
+    this.product = await this.dataSource.findProductById(this.productId);
+    // the product details are needed before rendering the HTML
+    this.renderProductDetails();
+    // once the HTML is rendered, add a listener to the Add to Cart button
+    // Notice the .bind(this). This callback will not work if the bind(this) is missing. Review the readings from this week on 'this' to understand why.
+    document
+      .getElementById("addToCart")
+      .addEventListener("click", this.addProductToCart.bind(this));
+  }
+
+  addProductToCart() {
+    const cartItems = getLocalStorage("so-cart") || [];
+    cartItems.push(this.product);
+    setLocalStorage("so-cart", cartItems);
+  }
+
+  renderProductDetails() {
+    productDetailsTemplate(this.product);
   }
 }
 
-// ProductData class fetches product data for a given category
-export default class ProductData  {
-  // Initialize with product category
-  constructor(category) {
-    this.category = category;
-    this.path = `../json/${this.category}.json`;
-  }
-  // Fetch all product data for the category
-  getData() {
-    return fetch(this.path)
-      .then(convertToJson).then((data) => data);
-  }
-  // Find a product by its id (string or number)
-  async findProductById(id) {
-    const products = await this.getData();
-    // Accept both string and number id
-    return products.find((item) => String(item.Id) === String(id));
-  }
+function productDetailsTemplate(product) {
+  document.querySelector("h2").textContent = product.Brand.Name;
+  document.querySelector("h3").textContent = product.NameWithoutBrand;
+
+  const productImage = document.getElementById("productImage");
+  productImage.src = product.Image;
+  productImage.alt = product.NameWithoutBrand;
+
+  document.getElementById("productPrice").textContent = product.FinalPrice;
+  document.getElementById("productColor").textContent = product.Colors[0].ColorName;
+  document.getElementById("productDesc").innerHTML = product.DescriptionHtmlSimple;
+
+  document.getElementById("addToCart").dataset.id = product.Id;
 }
