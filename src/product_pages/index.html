@@ -2,11 +2,15 @@
 
 <html lang="en">
   <head>
+    <!-- Meta tags for responsive design and character encoding -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sleep Outside | Product Make and Name</title>
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="../css/style.css" />
+    <!-- Product detail functionality -->
     <script src="../js/product.js" type="module"></script>
+    <!-- Header and footer injection -->
     <script src="../js/headerFooter.js" type="module"></script>
     <script type="module">import { injectHeaderFooter } from '../js/headerFooter.js'; injectHeaderFooter();</script>
   </head>
@@ -30,6 +34,7 @@
       </div>
 
       <section class="product-detail">
+        <!-- Product details will be dynamically rendered here -->
         <h2>Brand Name</h2>
         <h3 class="divider">Product</h3>
         <img
@@ -46,12 +51,6 @@
         </div>
       </section>
     </main>
-
-    <footer class="site-footer">
-      <div class="footer-content">
-        <p>&copy; 2025 Sleep Outside. All rights reserved.</p>
-        <p>Designed by Florian Adu Kausche</p>
-      </div>
-    </footer>
+    <!-- footer will be injected here -->
   </body>
 </html>
