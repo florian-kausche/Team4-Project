@@ -39,8 +39,15 @@ function productDetailsTemplate(product) {
   productImage.src = product.Image;
   productImage.alt = product.NameWithoutBrand;
 
-  // Add dollar sign to price
-  document.getElementById("productPrice").textContent = `$${product.FinalPrice}`;
+  // Show price and discount badge if discounted
+  const priceElem = document.getElementById("productPrice");
+  let priceHTML = `$${product.FinalPrice}`;
+  if (product.FinalPrice < product.SuggestedRetailPrice) {
+    const percent = Math.round(100 - (product.FinalPrice / product.SuggestedRetailPrice) * 100);
+    priceHTML += ` <span class="discount-badge">${percent}% OFF</span>`;
+  }
+  priceElem.innerHTML = priceHTML;
+
   document.getElementById("productColor").textContent = product.Colors[0].ColorName;
   document.getElementById("productDesc").innerHTML = product.DescriptionHtmlSimple;
 
