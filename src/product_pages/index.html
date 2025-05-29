@@ -53,19 +53,5 @@
     </main>
     <footer id="main-footer"></footer>
     <!-- footer will be injected here -->
-    <script>
-        // Discount badge logic for product detail page
-        document.addEventListener('DOMContentLoaded', function() {
-          // These values should be set dynamically in your JS, but for fallback/demo:
-          var finalPrice = 99; // This should be set to the actual product price dynamically
-          var suggestedPrice = 300; // This should be set to the actual suggested price dynamically
-          var discountBadge = document.getElementById('discountBadge');
-          if (finalPrice < suggestedPrice) {
-            var percent = Math.round(100 - (finalPrice / suggestedPrice) * 100);
-            discountBadge.textContent = percent + '% OFF';
-            discountBadge.style.display = 'inline-block';
-          }
-        });
-        </script>
   </body>
 </html>
