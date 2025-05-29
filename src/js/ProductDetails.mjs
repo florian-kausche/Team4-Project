@@ -39,7 +39,8 @@ function productDetailsTemplate(product) {
   productImage.src = product.Image;
   productImage.alt = product.NameWithoutBrand;
 
-  document.getElementById("productPrice").textContent = product.FinalPrice;
+  // Add dollar sign to price
+  document.getElementById("productPrice").textContent = `$${product.FinalPrice}`;
   document.getElementById("productColor").textContent = product.Colors[0].ColorName;
   document.getElementById("productDesc").innerHTML = product.DescriptionHtmlSimple;
 
