@@ -1,4 +1,6 @@
 // checkout.js - Handles checkout form validation and error checking
+import { loadHeaderFooter } from "../js/utils.mjs";
+loadHeaderFooter();
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("checkoutForm");

@@ -1,5 +1,6 @@
 // main.js - Handles dynamic rendering of product listing with discount indicator
 import ProductData from "./ProductData.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
 // Utility function to create a discount badge
 function createDiscountBadge(percent) {
@@ -59,5 +60,6 @@ async function renderProductList() {
 
 // Only run on the home page
 if (document.querySelector(".product-list")) {
+  loadHeaderFooter();
   renderProductList();
 }

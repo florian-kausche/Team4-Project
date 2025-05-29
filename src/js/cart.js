@@ -1,6 +1,6 @@
 // cart.js - Handles rendering the shopping cart contents on the cart page
 // Imports utility for accessing local storage
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, loadHeaderFooter } from "./utils.mjs";
 
 // Renders the cart items from local storage to the page
 function renderCartContents() {
@@ -36,4 +36,5 @@ function cartItemTemplate(item) {
 }
 
 // Initialize cart rendering on page load
+loadHeaderFooter();
 renderCartContents();
