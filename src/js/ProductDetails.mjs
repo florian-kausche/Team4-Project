@@ -39,10 +39,13 @@ function productDetailsTemplate(product) {
   productImage.src = product.Image;
   productImage.alt = product.NameWithoutBrand;
 
-  // Show price and discount badge if discounted
+  // Show price and discount badge if discounted, except for Rimrock Tent (ID: 344YJ)
   const priceElem = document.getElementById("productPrice");
   let priceHTML = `$${product.FinalPrice}`;
-  if (product.FinalPrice < product.SuggestedRetailPrice) {
+  if (
+    product.FinalPrice < product.SuggestedRetailPrice &&
+    String(product.Id) !== "344YJ"
+  ) {
     const percent = Math.round(100 - (product.FinalPrice / product.SuggestedRetailPrice) * 100);
     priceHTML += ` <span class="discount-badge">${percent}% OFF</span>`;
   }
