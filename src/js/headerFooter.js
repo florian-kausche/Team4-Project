@@ -8,8 +8,8 @@ export function injectHeaderFooter() {
         <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
         <a href="/index.html"> Sleep<span class="highlight">Outside</span></a>
       </div>
-      <div class="cart">
-        <a href="/cart/index.html">
+      <div class="cart" style="position:relative;">
+        <a href="/src/cart/add.html">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <!-- Cart icon SVG -->
             <path d="M18.9 32.6c1.1 2.4 2.5 3.3 5.4 3.3 1.6 0 3.6-0.3 5.9-0.6 3.2-0.5 6.9-1 11.2-1 2.1 0 4.3 0.1 6.4 0.3 2.1 0.1 4.2 0.3 6.1 0.3 3.2 0 5.2-0.4 5.9-1.2 2.7-2.7 2.8-8.8 2.9-14.6 0.1-6.7 0.2-14.5 4.6-18.7 -0.5 0-1 0-1.6 0 -14.2 0-37.5 0-41.1 0C15.6 6.2 14.9 23.6 18.9 32.6z"/>
@@ -19,6 +19,7 @@ export function injectHeaderFooter() {
             <path d="M24.3 68.4c2.9-0.1 6.4-0.9 8.3-1.4 0.1-0.8 0.3-2.8-0.7-3.5 -0.5-0.2-2.5-0.4-5.9-0.4 -4.9 0-8.6 0.4-9.5 0.7 -0.3 0.5-0.5 1.9-0.5 3.3C18 67.7 21.5 68.6 24.3 68.4z"/>
             <path d="M60.1 71.4v3.3h-5.2v-3.4c-1.7-0.3-3.3-0.7-4.6-1 -0.9 6.8-1.1 13.3-0.3 14.5 0.4 0.3 2.9 1.1 8 1.1h0c5 0 8.8-0.7 9.7-1.3 0.8-1.3 0.6-7.7-0.4-14.4C65.5 70.5 62.7 71.1 60.1 71.4z"/>
           </svg>
+          <span id="cart-count" style="position:absolute;top:0;right:0;background:#e53935;color:#fff;font-size:0.8em;padding:2px 7px;border-radius:50%;min-width:22px;text-align:center;display:inline-block;">0</span>
         </a>
       </div>
     </header>
@@ -40,4 +41,15 @@ export function injectHeaderFooter() {
   const footer = document.querySelector("footer");
   if (footer) footer.outerHTML = footerHTML;
   else document.body.insertAdjacentHTML("beforeend", footerHTML);
+  // Update cart count after header is in DOM
+  setTimeout(updateCartCount, 0);
+}
+
+// Update the cart count badge in the header
+export function updateCartCount() {
+  const cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
+  // Sum all quantities, but ensure each item only counts its quantity once
+  const count = cartItems.reduce((sum, item) => sum + (typeof item.quantity === "number" ? item.quantity : 1), 0);
+  const badge = document.getElementById("cart-count");
+  if (badge) badge.textContent = count;
 }

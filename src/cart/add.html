@@ -1,0 +1,34 @@
+<!-- filepath: src/cart/add.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep Outside | Added to Cart</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/headerFooter.js" type="module"></script>
+    <script src="../js/cart.js" type="module"></script>
+    <script type="module">import { injectHeaderFooter } from '../js/headerFooter.js'; injectHeaderFooter();</script>
+  </head>
+  <body>
+    <header class="divider" id="main-header"></header>
+    <main class="divider">
+      <div class="hero">
+        <img src="../images/banner-sm.jpg" srcset="../images/banner-sm.jpg 500w, ../images/banner.jpg" alt="image of a high mountain lake" />
+        <div class="mission">
+          <p>Items have been added to your cart. Review your cart below:</p>
+        </div>
+      </div>
+      <section class="products">
+        <h2>Items in Your Cart</h2>
+        <ul class="product-list">
+          <!-- Cart items will be dynamically inserted here -->
+        </ul>
+        <div style="margin-top:2em;">
+          <a href="/checkout/index.html" class="button" style="background:#2e7d32;color:#fff;padding:0.7em 2em;border-radius:5px;text-decoration:none;">Proceed to Checkout</a>
+        </div>
+      </section>
+    </main>
+    <footer id="main-footer"></footer>
+  </body>
+</html>

@@ -1,4 +1,5 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { updateCartCount } from "./headerFooter.js";
 
 export default class ProductDetails {
 
@@ -22,8 +23,35 @@ export default class ProductDetails {
 
   addProductToCart() {
     const cartItems = getLocalStorage("so-cart") || [];
-    cartItems.push(this.product);
+    // Check if product already in cart
+    const existing = cartItems.find(item => item.Id === this.product.Id);
+    if (existing) {
+      // If found, increment quantity
+      existing.quantity = (existing.quantity || 1) + 1;
+    } else {
+      // If not found, add with quantity 1
+      const productToAdd = { ...this.product, quantity: 1 };
+      cartItems.push(productToAdd);
+    }
     setLocalStorage("so-cart", cartItems);
+    // Update cart count in header
+    updateCartCount();
+    // Redirect to add-to-cart page
+    window.location.href = "/src/cart/add.html";
+  }
+
+  showAddToCartMessage() {
+    let msg = document.getElementById("addToCartMsg");
+    if (!msg) {
+      msg = document.createElement("div");
+      msg.id = "addToCartMsg";
+      msg.style.color = "green";
+      msg.style.marginTop = "1em";
+      document.querySelector(".product-detail__add").appendChild(msg);
+    }
+    msg.textContent = "Added to cart!";
+    msg.style.display = "block";
+    setTimeout(() => { msg.style.display = "none"; }, 1500);
   }
 
   renderProductDetails() {
