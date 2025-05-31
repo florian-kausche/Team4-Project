@@ -24,9 +24,28 @@
         <ul class="product-list">
           <!-- Cart items will be dynamically inserted here -->
         </ul>
-        <div style="margin-top:2em;">
-          <a href="/checkout/index.html" class="button" style="background:#2e7d32;color:#fff;padding:0.7em 2em;border-radius:5px;text-decoration:none;">Proceed to Checkout</a>
+        <div style="margin-top:2em; text-align:center;">
+          <a href="/src/checkout/index.html" id="proceedToCheckout" class="button btn btn-primary" style="background:#2e7d32;color:#fff;padding:0.9em 2.2em;border-radius:8px;text-decoration:none;font-size:1.2em;font-weight:bold;box-shadow:0 2px 8px rgba(46,125,50,0.10);transition:background 0.2s;display:inline-block;">
+            Proceed to Checkout
+          </a>
         </div>
+        <script>
+          // Professional: Make Proceed to Checkout button active and accessible
+          document.addEventListener("DOMContentLoaded", function() {
+            const btn = document.getElementById("proceedToCheckout");
+            if (btn) {
+              btn.addEventListener("click", function(e) {
+                // Optionally, add any pre-checkout logic here
+                btn.blur();
+              });
+              btn.addEventListener("keydown", function(e) {
+                if (e.key === "Enter" || e.key === " ") {
+                  btn.click();
+                }
+              });
+            }
+          });
+        </script>
       </section>
     </main>
     <footer id="main-footer"></footer>
