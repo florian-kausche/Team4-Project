@@ -241,6 +241,18 @@ button {
   grid-column: 3;
 }
 
+.cart-card__price .original-price {
+  text-decoration: line-through;
+  color: #888;
+  margin-right: 0.5em;
+}
+
+.cart-card__price .final-price {
+  color: #e53935;
+  font-weight: bold;
+  margin-right: 0.5em;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -275,4 +287,12 @@ footer {
   vertical-align: middle;
   letter-spacing: 0.03em;
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.discount-amount {
+  display: inline-block;
+  color: #388e3c;
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-left: 0.5em;
+  vertical-align: middle;
 }

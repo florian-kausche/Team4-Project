@@ -14,13 +14,23 @@ export default class ProductData {
   // Initialize with product category
   constructor(category) {
     this.category = category;
-    this.path = `../json/${this.category}.json`;
+    // Dynamically resolve path for root and src/ pages
+    const isRoot = window.location.pathname.endsWith("index.html") || window.location.pathname === "/";
+    this.path = isRoot ? "src/json/" + this.category + ".json" : "../json/" + this.category + ".json";
   }
   // Fetch all product data for the category
   getData() {
     return fetch(this.path)
       .then(convertToJson)
-      .then((data) => data);
+      .then((data) => {
+        // If data is an object with a Result array, use that (for paginated JSON)
+        const products = Array.isArray(data) ? data : data.Result;
+        // Add isDiscounted property to each product
+        return products.map(product => ({
+          ...product,
+          isDiscounted: product.FinalPrice < product.SuggestedRetailPrice
+        }));
+      });
   }
   // Find a product by its id (string or number)
   async findProductById(id) {

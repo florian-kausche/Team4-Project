@@ -14,14 +14,19 @@ function renderCartContents() {
 
 // Returns HTML template for a single cart item
 function cartItemTemplate(item) {
-  let discountHTML = "";
-  let price = item.FinalPrice;
-  if (item.FinalPrice < item.SuggestedRetailPrice) {
-    const percent = Math.round(100 - (item.FinalPrice / item.SuggestedRetailPrice) * 100);
-    discountHTML = `<span class="discount-badge">${percent}% OFF</span>`;
+  const discounted = item.FinalPrice < item.SuggestedRetailPrice;
+  let discountPercent = 0;
+  if (item.SuggestedRetailPrice > 0) {
+    discountPercent = Math.round(100 * (item.SuggestedRetailPrice - item.FinalPrice) / item.SuggestedRetailPrice);
   }
   const qty = item.quantity || 1;
-  const newItem = `<li class="cart-card divider" data-id="${item.Id}">
+  const totalFinal = (item.FinalPrice * qty).toFixed(2);
+  const totalOriginal = (item.SuggestedRetailPrice * qty).toFixed(2);
+  const totalSaved = ((item.SuggestedRetailPrice - item.FinalPrice) * qty).toFixed(2);
+  let priceHTML = discounted
+    ? `<span class="original-price">$${item.SuggestedRetailPrice.toFixed(2)}</span> <span class="final-price">$${item.FinalPrice.toFixed(2)}</span> <span class="discount-badge">${discountPercent}% OFF</span> <span class="discount-amount">(You save $${(item.SuggestedRetailPrice - item.FinalPrice).toFixed(2)} per item)</span>`
+    : `$${item.FinalPrice.toFixed(2)}`;
+  return `<li class="cart-card divider" data-id="${item.Id}">
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"
@@ -33,11 +38,10 @@ function cartItemTemplate(item) {
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: ${qty}</p>
-  <p class="cart-card__price">$${(price).toFixed(2)} ${discountHTML}</p>
+  <p class="cart-card__price">${priceHTML}</p>
+  <p class="cart-card__total">Total: <span class="final-price">$${totalFinal}</span>${discounted ? ` <span class="original-price">$${totalOriginal}</span> <span class="discount-amount">(You save $${totalSaved})</span>` : ""}</p>
   <button class="remove-from-cart" style="background:#e53935;color:#fff;border:none;padding:0.4em 1em;border-radius:5px;cursor:pointer;margin-top:0.5em;">Remove</button>
 </li>`;
-
-  return newItem;
 }
 
 function addRemoveListeners() {
