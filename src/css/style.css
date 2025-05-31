@@ -296,3 +296,129 @@ footer {
   margin-left: 0.5em;
   vertical-align: middle;
 }
+
+/* Shop by Category styles */
+.categories {
+  margin: 2em 0 3em 0;
+  text-align: center;
+}
+.category-list {
+  display: flex;
+  justify-content: center;
+  gap: 2.5em;
+  flex-wrap: wrap;
+  margin-top: 1.5em;
+}
+.category-list.professional {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 3em;
+  margin: 2em 0 2.5em 0;
+  flex-wrap: wrap;
+}
+.category-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #111;
+  transition: transform 0.15s, box-shadow 0.15s;
+  min-width: 120px;
+}
+.category-link:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+.category-link img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 0.7em;
+  filter: grayscale(0%) contrast(1.1);
+}
+.category-label {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 0.2em;
+  letter-spacing: 0.01em;
+}
+.category-intro {
+  text-align: center;
+  margin-bottom: 2.5em;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.category-intro__headline {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 0.7em;
+  color: #333;
+  letter-spacing: 0.01em;
+}
+.category-intro__mission {
+  font-size: 1.1em;
+  color: #222;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+.category-intro__mission .highlight {
+  color: #e53935;
+  font-weight: bold;
+}
+.intro-message {
+  background: linear-gradient(90deg, #f0a868 0%, #ffe5c2 100%);
+  padding: 2.5em 0 2em 0;
+  margin-bottom: 2em;
+  box-shadow: 0 2px 16px rgba(240,168,104,0.08);
+}
+.intro-message__container {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+.intro-message__headline {
+  font-family: var(--font-headline);
+  font-size: 2.2em;
+  color: var(--secondary-color);
+  margin-bottom: 0.5em;
+  letter-spacing: 0.01em;
+}
+.intro-message__highlight {
+  color: #e53935;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+.intro-message__text {
+  font-size: 1.2em;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 0.5em;
+}
+.intro-message__sub {
+  display: block;
+  font-size: 1em;
+  color: #525b0f;
+  margin-top: 1em;
+  font-style: italic;
+}
+@media (max-width: 700px) {
+  .category-list.professional {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+  }
+  .category-intro {
+    font-size: 1em;
+    padding: 0 1em;
+  }
+  .intro-message__headline {
+    font-size: 1.3em;
+  }
+  .intro-message__text {
+    font-size: 1em;
+  }
+  .intro-message {
+    padding: 1.2em 0 1em 0;
+  }
+}
